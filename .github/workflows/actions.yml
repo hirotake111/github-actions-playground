@@ -16,7 +16,7 @@ jobs:
           persist-credentials: false
 
       - name: build image
-        run: docker build -t example-app
+        run: docker build -t example-app .
 
       - name: test
         run: docker images
