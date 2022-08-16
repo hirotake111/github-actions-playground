@@ -1,0 +1,22 @@
+name: Deploy server
+
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  job1:
+    name: deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: build image
+        run: docker build -t example-app
+
+      - name: test
+        run: docker images
