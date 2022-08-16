@@ -16,7 +16,16 @@ jobs:
           persist-credentials: false
 
       - name: build image
-        run: docker build -t example-app .
+        run: docker build -t gcr.io/${{ secrets.PROJECT_NAME }}/example-app:tag1 .
 
       - name: test
         run: docker images
+
+      - name: set up gcloud
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          version: "362.0.0"
+          service_account_key: ${{ secrets.SA_KEY }}
+
+      - name: push image
+        run: docker push gcr.io/${{ secrets.PROJECT_NAME }}/example-app:tag1
