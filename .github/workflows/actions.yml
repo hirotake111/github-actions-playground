@@ -31,3 +31,6 @@ jobs:
 
       - name: push image
         run: docker push gcr.io/${{ secrets.PROJECT_NAME }}/example-app:tag1
+
+      - name: check hash
+        run: git rev-parse HEAD
