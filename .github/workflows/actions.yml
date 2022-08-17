@@ -40,7 +40,7 @@ jobs:
         run: git rev-parse HEAD
 
       - name: deploy
-        run: gcloud run deploy $SERVICE_NAME --project $PROJECT_NAME --image $TAG_NAME -region us-central1 --platform managed --allow-unauthenticated $NO_TRAFFIC
+        run: gcloud run deploy $SERVICE_NAME --project $PROJECT_NAME --image $TAG_NAME --region us-central1 --platform managed --allow-unauthenticated $NO_TRAFFIC
         env:
           SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
           PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
