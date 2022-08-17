@@ -40,9 +40,18 @@ jobs:
         run: git rev-parse HEAD
 
       - name: deploy
-        run: gcloud run deploy $SERVICE_NAME --project $PROJECT_NAME --image $TAG_NAME --region us-central1 --platform managed --allow-unauthenticated $NO_TRAFFIC
-        env:
-          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
-          PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-          TAG_NAME: gcr.io/${{ secrets.PROJECT_NAME }}/example-app
-          NO_TRAFFIC: --no-traffic
+        uses: "google-github-actions/deploy-cloudrun@v0"
+        with:
+          service: ${{ secrets.SERVICE_NAME }}
+          image: ${{ secrets.TAG_NAME }}
+          project_id: ${{ secrets.PROJECT_NAME }}
+          region: us-central1
+          no_traffic: true
+
+      #- name: deploy
+      #  run: gcloud run deploy $SERVICE_NAME --project $PROJECT_NAME --image $TAG_NAME --region us-central1 --platform managed --allow-unauthenticated $NO_TRAFFIC
+      #  env:
+      #    SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+      #    PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+      #    TAG_NAME: gcr.io/${{ secrets.PROJECT_NAME }}/example-app
+      #    NO_TRAFFIC: --no-traffic
