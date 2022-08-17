@@ -43,7 +43,7 @@ jobs:
         uses: "google-github-actions/deploy-cloudrun@v0"
         with:
           service: ${{ secrets.SERVICE_NAME }}
-          image: ${{ secrets.TAG_NAME }}
+          image: gcr.io/${{ secrets.PROJECT_NAME }}/example-app
           project_id: ${{ secrets.PROJECT_NAME }}
           region: us-central1
           no_traffic: true
