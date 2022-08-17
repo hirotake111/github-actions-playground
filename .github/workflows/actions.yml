@@ -39,7 +39,10 @@ jobs:
       - name: check hash
         run: git rev-parse HEAD
 
-      #- name: deploy
-      #  run: gcloud run deploy test111 --project $PROJECT_NAME
-      #  env:
-      #    PROJECT_NAME: secrets.PROJECT_NAME
+      - name: deploy
+        run: gcloud run deploy $SERVICE_NAME --project $PROJECT_NAME --image $TAG_NAME -region us-cntral1 --platform managed --allow-unauthenticated $NO_TRAFFIC
+        env:
+          SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+          PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+          TAG_NAME: gcr.io/${{ secrets.PROJECT_NAME }}/example-app
+          NO_TRAFFIC: --no-traffic
